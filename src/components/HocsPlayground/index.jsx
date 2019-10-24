@@ -1,4 +1,5 @@
 import React, {useState, Fragment} from 'react';
+import { COLORS } from '../../constants';
 
 import styles from './styles.module.css';
 import ButtonN1 from './Buttons/ButtonN1';
@@ -14,35 +15,40 @@ const DescriptionList = () => (
         <li>Кнопка small размера цвета default, в разметке над ней — отображается счетчик начиная с 5, при каждом клике счетчик уменьшается, при достижении значения 0 счетчик сбрасывается на 5 и оба круга красятся в рыжий цвет.</li>
         <li>Кнопка large размера цвета primary, при клике делает оборот вокруг своего центра на 30° против часовой стрелки, при совершении оборота на 360°, меняет цвета кругов на случайные (на выбор из уже используемых, можете добавить 3-4 цвета)."</li>
     </ol>
-)
+);
 
 const HocsPlayground = () => {
-    const [innerColor, setInnerColor] = useState('blue');
-    const [outerColor, setOuterColor] = useState('red');
+    const INIT_STATE = {
+        innerColor: COLORS.blue,
+        outerColor: COLORS.red,
+    };
+    const [ state, setColorsState ] = useState(INIT_STATE);
 
     return (
         <Fragment>
             <DescriptionList/>
 
             <svg>
-                <circle fill={outerColor} cx="60" cy="60" r="50"/>
-                <circle fill={innerColor} cx="60" cy="60" r="30"/>
+                <circle fill={state.outerColor} cx="60" cy="60" r="50"/>
+                <circle fill={state.innerColor} cx="60" cy="60" r="30"/>
             </svg>
 
             <div className={styles.buttonList}>
-                <ButtonN1 setOuterColor={setOuterColor} setInnerColor={setInnerColor}>
+                <ButtonN1 setColorsState={setColorsState} outerColor={COLORS.blue}>
                     Внешний в синий
                 </ButtonN1>
 
-                <ButtonN2 setOuterColor={setOuterColor} setInnerColor={setInnerColor}>
+                <ButtonN2 setColorsState={setColorsState} outerColor={COLORS.red}>
                     Внешний в красный
                 </ButtonN2>
 
-                <ButtonN3 setOuterColor={setOuterColor} setInnerColor={setInnerColor}>Четные/нечетные клики</ButtonN3>
+                <ButtonN3 setColorsState={setColorsState} initCount={0}>
+                    Четные/нечетные клики
+                </ButtonN3>
 
-                <ButtonN4 setOuterColor={setOuterColor} setInnerColor={setInnerColor}>Уходящий counter</ButtonN4>
+                <ButtonN4 setColorsState={setColorsState} initCount={5}>Уходящий counter</ButtonN4>
 
-                <ButtonN5 setOuterColor={setOuterColor} setInnerColor={setInnerColor}>Крутящаяся кнопка</ButtonN5>
+                <ButtonN5 setColorsState={setColorsState}>Крутящаяся кнопка</ButtonN5>
             </div>
         </Fragment>
     );

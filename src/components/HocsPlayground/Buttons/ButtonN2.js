@@ -1,13 +1,12 @@
 import {compose} from 'recompose';
 import BaseButton from './BaseButton';
 
-import withOnClickSetOuterRed from '../hocs/withOnClickSetOuterRed';
 import withMediumSize from '../hocs/withMediumSize';
 import withDefaultColor from '../hocs/withDefaultColor';
-
+import withOnClickSetOuterColor from "../hocs/withOnClickSetOuterColor";
 
 export default compose(
-    withOnClickSetOuterRed,
+    withOnClickSetOuterColor,
     withMediumSize,
     withDefaultColor,
 )(BaseButton)

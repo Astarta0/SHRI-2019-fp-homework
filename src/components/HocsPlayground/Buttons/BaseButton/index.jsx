@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 
 const getButtonClassName = (size, color) => cn(
-    styles.button, 
+    styles.button,
     {
         [styles.buttonSizeSmall]: size === 'small',
         [styles.buttonSizeMedium]: size === 'medium',
@@ -21,9 +21,18 @@ const BaseButton = ({
     onClick,
     onMouseOn,
     children,
+    angle = 0
 }) => {
     return (
-        <button onMouseUp={onMouseOn} onClick={onClick} className={getButtonClassName(size, color)}>
+        <button
+            style={{
+                transformOrigin: "center",
+                transform: `rotate(${angle}deg)`
+            }}
+            onMouseUp={onMouseOn}
+            onClick={onClick}
+            className={getButtonClassName(size, color)}
+        >
             {children}
         </button>
     );
