@@ -5,19 +5,9 @@ import React from 'react';
 import {compose} from 'recompose';
 import BaseButton from './BaseButton';
 import withCountOfClick from '../hocs/withCountOfClick';
-
-import s from '../styles.module.css';
-
-const ButtonN4 = (props) => {
-    return (
-        <div className={s.withOuterCount}>
-            <div>{props.countState.count}</div>
-            <BaseButton {...props}/>
-        </div>
-    );
-};
-
+import withOuterCount from '../hocs/withOuterCount';
 
 export default compose(
-    withCountOfClick
-)(ButtonN4)
+    withCountOfClick,
+    withOuterCount
+)(BaseButton)
